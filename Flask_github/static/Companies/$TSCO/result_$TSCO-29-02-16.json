@@ -1,0 +1,1 @@
+{"directed": false, "multigraph": false, "graph": {}, "links": [{"target": 3, "value": 8, "source": 0}, {"target": 3, "value": 2, "source": 1}, {"target": 3, "value": 18, "source": 2}], "nodes": [{"group": 4, "id": "fear"}, {"group": 3, "id": "disappointment"}, {"group": 2, "id": "contentment"}, {"y": 400, "fixed": true, "x": 500, "id": "Emotion"}]}

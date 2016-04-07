@@ -1,0 +1,120 @@
+{% extends "basic_temp.html" %}
+
+{% block content %}
+<!--
+<center>
+	<h2>word: {{mystring}} </h2>
+</center> -->
+	<div class ="container text-center">
+	<h1> Apple </h1>
+	<hr>
+	</div>
+
+<script type="text/javascript">
+
+	//Width and height
+			var w = 1000;
+			var h = 800;
+			
+			var colors = d3.scale.category20();
+
+var dataset = {
+  "nodes":[
+                { "name": "Emotion", "x":500, "y":400, "fixed":"true"},
+				{ "name": "Interest","x":550, "y":200, "fixed":"true" },
+                { "name": "Amusement","x":610, "y":230, "fixed":"true" },
+				{ "name": "Pride","x":654, "y":268, "fixed":"true"},
+				{ "name": "Pleasure","x":682, "y":323, "fixed":"true" },
+				
+                { "name": "Angry", "x":450, "y":200, "fixed":"true" },
+                { "name": "Compassion","x":550, "y":590, "fixed":"true" },
+                { "name": "Contempt" ,"x":345, "y":287, "fixed":"true"},
+                { "name": "Disappointment" ,"x":319, "y":462, "fixed":"true"},
+                { "name": "Admiration","x":650, "y":517, "fixed":"true" },
+                { "name": "Disgust","x":318, "y":342, "fixed":"true" },
+                { "name": "Fear","x":309, "y":402, "fixed":"true" },
+                { "name": "Guilt","x":443, "y":581, "fixed":"true"},
+                { "name": "Hate" ,"x":388, "y":245, "fixed":"true"},
+                { "name": "Contentment","x":690, "y":424, "fixed":"true" },
+                { "name": "Love","x":680, "y":484, "fixed":"true"},
+                
+                { "name": "Regret","x":390, "y":556, "fixed":"true" },
+                { "name": "Relief","x":606, "y":557, "fixed":"true" },
+                { "name": "Sadness", "x":480, "y":590, "fixed":"true" },
+                
+                { "name": "Shame","x":348, "y":515, "fixed":"true" },
+                { "name": "Joy","x":690, "y":380, "fixed":"true" }
+  ],
+  "links":[
+                { "source": 0, "target":1},
+                { "source": 0, "target":2},
+                { "source": 0, "target":3},
+                { "source": 0, "target":4},
+                { "source": 0, "target":5},
+                { "source": 0, "target":6},
+                { "source": 0, "target":7},
+                { "source": 0, "target":8},
+                { "source": 0, "target":9},
+                { "source": 0, "target":10},
+                { "source": 0, "target":11},
+                { "source": 0, "target":12},
+                { "source": 0, "target":13},
+                { "source": 0, "target":14},
+                { "source": 0, "target":15},
+                { "source": 0, "target":16},
+                { "source": 0, "target":17},
+                { "source": 0, "target":18},
+                { "source": 0, "target":19},
+                { "source": 0, "target":20}
+  ]
+};
+// initialising force layout
+var force = d3.layout.force()
+                     .nodes(dataset.nodes)
+                     .links(dataset.links)
+                     .size([w, h])
+                     .linkDistance(200)
+                     .charge([-200])           
+                     .start();
+var svg = d3.select("#emotionWheel").append("svg").attr("width",w).attr("height",h);
+// create an SVG line for each edge
+var links = svg.selectAll("line")
+        .data(dataset.links)
+        .enter()
+        .append("line")
+        .style("stroke", "#ccc")
+        .style("stroke-width", 1);
+// create an SVG circle for each node
+var nodes = svg.selectAll("g")
+        .data(dataset.nodes)
+        .enter()
+        .append("g");
+		
+nodes.append("circle").attr("r", 18).style("fill", function(d, i) {return colors(i);}).call(force.drag);
+
+nodes.append("text").attr("x",20).attr("dy",".35em").text(function(d) {return d.name;});
+		
+force.on("tick", function() {links.attr("x1", function(d) { return d.source.x; })
+     .attr("y1", function(d) { return d.source.y; })
+     .attr("x2", function(d) { return d.target.x; })
+     .attr("y2", function(d) { return d.target.y; });
+
+//nodes.attr("cx", function(d) { return d.x; })
+    // .attr("cy", function(d) { return d.y; });
+	
+	nodes.attr("transform", function(d){
+		return "translate("+d.x +","+ d.y +")";}
+	);
+	 
+
+
+});
+
+	</script>
+<center>
+<div class ="container text-center">
+<button type ="button" class="btn btn-primary text-center"> Further analysis </button>
+</div>
+</center>
+
+{% endblock %}

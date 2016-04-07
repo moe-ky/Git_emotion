@@ -1,0 +1,116 @@
+[
+{"amaze": ["astonish","astound","baffle"]},
+
+{"angry": ["furious", "raging", "tempestuous"]},
+
+{"annoyed": ["annoy","pissed"]},
+
+{"cheerful": ["cheerful", "upbeat"]},
+
+{"collapse": ["crumble", "crumple", "tumble", "burst","tumbles"]},
+
+{"crap": ["shit", "shite","bullshit","horseshit", "dogshit"]},
+
+{"crash": ["wreck","smash"]},
+
+{"decline": ["descent","downslope", "wane", "slump", "fall","descend","falling"]},
+
+{"decrease": ["lessening", "decrement", "reduction","diminish", "lessen"]},
+
+{"delighted": ["please", "delight", "enjoy", "revel","pleased"]},
+
+{"depressed": ["depress","demoralize", "demoralise", "lower", "gloomy","low","lowly","lower","lowest","lows"]},
+
+{"depression": ["depression", "slump", "economic_crisis"]},
+
+{"disgruntled": ["disgruntle", "dissatisfied"]},
+
+{"doomed": ["lost", "doom"]},
+
+{"down": ["downward","downwards","downwardly"]},
+
+{"drop": ["drop", "dip", "sink", "dropping","sunk"]},
+
+{"ecstatic": ["ecstatic", "enraptured", "rapturous", "rapt", "rhapsodic"]},
+
+{"elated": ["elate", "lift_up", "uplift", "pick_up", "intoxicate", "elated", "gleeful", "joyful", "jubilant"]},
+
+{"fatal": ["fatal", "calamitous", "disastrous"]},
+
+{"fear": ["fearfulness", "fright", "concern","dread", "revere", "venerate","afraid"]},
+
+{"fearful": ["fearful", "awful", "dire", "direful", "dreaded", "dreadful", "fearsome", "frightening", "horrendous", "horrific", "terrible", "frightful", "timorous", "trepid"]},
+{"frightened": ["frighten", "scare", "affright", "scared", "panicky", "panicked", "panic-stricken", "panic-struck", "terrified"]},
+{"furious": ["angered", "enraged", "infuriated", "maddened","raging"]},
+
+{"fury": ["fury", "rage","craze", "delirium", "frenzy", "hysteria"]},
+
+{"good": ["good","respectable", "beneficial", "dependable", "safe", "secure"]},
+
+{"growth": ["growth", "growing", "maturation", "development","increase", "increment", "emergence", "outgrowth"]},
+
+{"happy": ["happy","glad"]},
+
+{"high": []},
+
+{"horrified": ["dismay", "alarm", "appal", "appall", "horrify", "horrified", "horror-stricken", "horror-struck"]},
+
+{"lose": ["lose", "misplace", "mislay", "turn_a_loss", "fall_back", "drop_off", "fall_behind", "recede", "miss", "suffer","losing","loss","lost"]},
+
+{"meltdown": ["meltdown"]},
+
+{"nervous": ["nervous", "anxious", "queasy", "uneasy", "unquiet"]},
+
+{"outperform": ["surpass", "outstrip", "outmatch", "outgo", "exceed", "outdo", "surmount", "outperform"]},
+
+{"outraged": ["shock", "offend", "scandalize", "scandalise","outrage"]},
+
+{"panic": ["panic", "terror", "affright", "scare"]},
+
+{"pessimism": ["pessimism"]},
+
+{"plunge": ["dip", "plunge", "immerse", "dive", "plunk"]},
+
+{"poor": ["hapless", "miserable", "misfortunate", "pathetic", "piteous", "pitiable", "pitiful", "wretched", "inadequate", "short"]},
+
+{"positive": []},
+
+{"profit": ["profits", "gain", "benefit"]},
+
+{"rally": ["rally","rallying"]},
+
+{"recovered": ["recover","regain", "recuperate"]},
+
+{"relief": ["relief", "alleviation", "assuagement", "ease"]},
+
+{"rise": ["rise", "ascent", "ascension", "ascending", "acclivity", "raise", "climb", "upgrade", "rising", "wage_hike", "hike","boost", "advance", "arise","ascend"]},
+
+{"risky": ["hazardous", "risky","speculative"]},
+
+{"rotten": ["icky", "crappy", "lousy", "rotten", "shitty", "stinking", "stinky", "decayed", "rotted"]},
+
+{"sad": ["sad", "deplorable", "distressing", "lamentable", "pitiful", "sorry"]},
+
+{"satisfied": ["satisfy", "fulfill", "fulfil", "live_up_to", "gratify", "meet", "fill", "satisfied", "quenched", "slaked"]},
+
+{"shock": ["daze", "shock", "stupor"]},
+
+{"slide": ["slide", "microscope_slide", "swoop", "playground_slide", "sliding_board", "glide", "coast", "lantern_slide", "chute", "slideway", "sloping_trough", "skid", "slip", "slue", "slew", "slither"]},
+
+{"stumble": ["lurch", "stumble", "stagger", "trip", "trip-up", "misstep", "falter", "bumble", "hit", "slip_up", "trip_up"]},
+
+{"tanked": ["tank"]},
+
+{"uncertainty": ["uncertainty", "uncertainness", "precariousness", "doubt", "incertitude", "dubiety", "doubtfulness", "dubiousness"]},
+
+{"underperforms": ["underachieve", "underperform"]},
+
+{"unfortunate": ["unfortunate", "inauspicious"]},
+
+{"weak": ["weak","fallible", "frail","feeble","weakly", "faint"]},
+
+{"winning": ["winning", "win", "acquire", "succeed", "come_through","victorious"]},
+
+{"worried": ["worry","distressed", "disturbed", "upset", "apprehensive"]},
+{"worse": ["worse", "worsened", "bad", "big", "tough", "spoiled", "spoilt", "regretful", "sorry", "uncollectible", "unfit"]}
+]

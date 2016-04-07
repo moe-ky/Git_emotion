@@ -1,0 +1,152 @@
+{% extends "basic_temp.html" %}
+
+{% block nav %}
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+	  <div class="container-fluid">
+		<h1 style="color:white;">ITV</h1>
+	  </div>
+	</nav>	
+	
+	<div id="tooltip" class="hidden">
+        <p><strong><span id="emotion">Emotion information</span></strong></p>
+        <p><span id="value">100</span></p>
+		</div>
+{% endblock %}
+
+{% block content %}
+<!--
+<center>
+	<h2>word: {{mystring}} </h2>
+</center> -->
+<script type="text/javascript">
+
+//Width and height
+var w = 1000;var h = 800;
+// initialising force layout
+var force = d3.layout.force()
+    .size([w, h])
+    .charge(-1000)
+    .start();
+
+// initialising SVG element	
+var svg = d3.select("#emotionWheel").append("svg").attr("width",w).attr("height",h);
+// color category for nodes
+var colors = d3.scale.category20();
+
+d3.json("{{ url_for ('static', filename= '$GOOG.json' )}}", function(error,graph){
+
+//initialise nodes and links to the force
+force
+	.nodes(graph.nodes)
+	.links(graph.links)
+	.linkDistance(300)
+	.start();
+// creating lines that connect nodes
+var link = svg.selectAll(".link")
+	.data(graph.links)
+	.enter().append("line")
+	.attr("class","link")
+	.style("stroke", "teal")
+    .style("stroke-width", 
+	function(d)
+	{if (Math.abs(d.value) > 100)
+	{return 10;}
+	else
+		{return 2;}
+	;});
+
+	
+var labels = svg.selectAll("text")                                      //***NEW
+	.data(graph.links)
+	.enter()
+	.append("text")
+	.attr({"x":function(d){return d.x;},
+		   "y":function(d){return d.y;}})
+	.text(function(d){
+	if (Math.abs(d.value) > 100)
+		{return "High";}
+	else if(Math.abs(d.value) >50 && Math.abs(d.value) <99)
+		{return "Medium";}
+	else if (Math.abs(d.value) < 50 )
+		{return "Low";}
+	;});
+
+	//creating nodes that are connected by links
+var node = svg.selectAll("g")
+	.data(graph.nodes)
+	.enter().append("g").on("mouseover", function(d) {
+
+	d3.select(this).select("circle").transition()
+	.duration(750)
+	.attr("r",30)
+	
+var xPosition = d.x + w/2
+var yPosition = d.y
+
+//Update the tooltip position and value
+var tooltip = d3.select("#tooltip")
+  .style("left", xPosition + "px")
+  .style("top", yPosition + "px")
+  .select("#value")
+  .text(d.id+ " belongs to group " +d.group);
+  
+
+//Show the tooltip
+d3.select("#tooltip").classed("hidden", false);
+
+}).on("mouseout",function() {
+
+//Hide the tooltip
+d3.select("#tooltip").classed("hidden", true);
+
+	d3.select(this).select("circle").transition()
+	.duration(750)
+	.attr("r",20);
+
+})
+	
+node.append("circle").attr("r", 20).style("fill", function(d) {return colors(d.group);}).call(force.drag);
+node.append("text").attr("x",18).attr("y",18).attr("dy",".35em").text(function(d) {return d.id;});
+
+/*
+function mouseover(){
+	d3.select(this).select("circle").transition()
+	.duration(750)
+	.attr("r",30)
+}
+*/
+/*
+function mouseout(){
+	d3.select(this).select("circle").transition()
+	.duration(750)
+	.attr("r",20);
+}
+*/
+	force.on("tick", function() {
+	link.attr("x1", function(d) { return d.source.x; })
+        .attr("y1", function(d) { return d.source.y; })
+        .attr("x2", function(d) { return d.target.x; })
+        .attr("y2", function(d) { return d.target.y; });
+
+						
+		labels.attr("x", function(d) {
+            return ((d.source.x + d.target.x)/2);
+        })
+        .attr("y", function(d) {
+            return ((d.source.y + d.target.y)/2);
+        });
+//nodes.attr("cx", function(d) { return d.x; })
+    // .attr("cy", function(d) { return d.y; });
+	
+	node.attr("transform", function(d){
+		return "translate("+d.x +","+ d.y +")";}
+	);
+});
+});
+	</script>
+		
+<div class ="container text-center">
+<button type ="button" class="btn btn-primary text-center"> Further analysis </button>
+</div>
+
+{% endblock %}

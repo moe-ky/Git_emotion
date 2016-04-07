@@ -1,0 +1,63 @@
+{% extends "basic_temp_Home.html" %}
+
+{% block content %}
+<!--
+<center>
+	<h2>word: {{mystring}} </h2>
+</center> -->
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+	  <div class="container">
+		<h1 style="color:white;">IWE</h1>
+	  </div>
+	</nav>
+	
+	<div class = "container-fluid text-center" style="padding-bottom: 30px;">
+		<form class="navbar-form navbar-center" role="search">
+		  <div class="form-group">
+			<input type="text" class="form-control" placeholder="Type symbol here">
+		  </div>
+		  <button type="submit" class="btn btn-default">New Analysis </button>
+		</form>
+	</div>
+	
+	
+	  <div style="position: absolute; left:200px; top: 200px;">
+		<div class="thumbnail">
+		<div class="btn-group">
+		  <button type="button" class="btn btn-warning"><b>NasdaQ</b></button>
+		  <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			<span class="caret"></span>
+			<span class="sr-only">Toggle Dropdown</span>
+		  </button>
+		  <ul class="dropdown-menu">
+			<li><a href="$AAPL">Apple</a></li>
+			<li><a href="$GOOG">Google</a></li>
+			<li><a href="$FB">Facebook</a></li>
+		  </ul>
+		</div>
+		</div>
+	  </div>
+	  
+	  	 <div style="position: absolute; left: 850px; top: 200px;">
+		<div class="thumbnail">
+		<div class="btn-group">
+		  <button type="button" class="btn btn-warning"><b>FTSE 100</b></button>
+		  <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			<span class="caret"></span>
+			<span class="sr-only">Toggle Dropdown</span>
+		  </button>
+		  <ul class="dropdown-menu">
+			<li><a href="$GLEN">Glencore</a></li>
+			<li><a href="#">SKY plc</a></li>
+			<li><a href="$ITV">ITV plc</a></li>
+			<li><a href="#">Tesco</a></li>
+		  </ul>
+		</div>
+		</div>
+		</div>
+		
+
+
+	
+
+{% endblock %}

@@ -1,0 +1,22 @@
+{
+"amusement": 1,
+"interest": 1,
+"pride":1,
+"joy":1,
+"pleasure":1,
+"relief":2,
+"compassion":2,
+"admiration":2,
+"contentment":2,
+"love":2,
+"disappointment":3,
+"regret":3,
+"sadness":3,
+"shame":3,
+"guilt":3,
+"hate":4,
+"contempt":4,
+"disgust":4,
+"fear":4,
+"anger":4
+}

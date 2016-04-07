@@ -1,0 +1,107 @@
+{% extends "basic_temp.html" %}
+
+{% block content %}
+<!--
+<center>
+	<h2>word: {{mystring}} </h2>
+</center> -->
+	<div class ="container text-center">
+	<h1> Apple </h1>
+	<hr>
+	</div>
+
+<script type="text/javascript">
+
+	//Width and height
+var w = 1000;var h = 500;
+// initialising force layout
+
+					 
+var svg = d3.select("#emotionWheel").append("svg").attr("width",w).attr("height",h);
+
+var colors = d3.scale.category20();
+d3.json("{{ url_for ('static', filename= 'force.json' )}}", function(error,graph){
+
+var force = d3.layout.force()
+    .size([w, h])
+    .linkDistance(200)
+    .charge(-500)
+    .start();
+
+var nodes ={};
+var links = graph.arcs;
+var pathtype =[];
+
+//compute the distinct nodes form the links
+links.forEach(function(link){
+link.source = nodes[link.source] || (nodes[link.source] = {name: link.source});
+link.target = nodes[link.target] || (nodes[link.target] = {name: link.target});
+pathtype.push(link.dependency);
+});
+
+console.log(pathtype);
+
+force.nodes(d3.values(nodes))
+	.links(links)
+	.on("tick",tick)
+	.start();
+
+svg.append("defs").selectAll("marker")
+    .data(pathtype)
+  .enter().append("marker")
+    .attr("id", function(d) { return d; })
+    .attr("viewBox", "0 -5 10 10")
+    .attr("refX", 2)
+    .attr("refY", -1.5)
+    .attr("markerWidth", 2)
+    .attr("markerHeight", 2)
+    .attr("orient", "auto")
+  .append("path")
+
+  var path = svg.append("g").selectAll("path")
+    .data(force.links())
+  .enter().append("path")
+    .attr("class", function(d) { return "link " + d.dependency; })
+    .attr("marker-end", function(d) { return "url(#" + d.dependency + ")"; });
+	
+	var circle = svg.append("g").selectAll("circle")
+    .data(force.nodes())
+  .enter().append("circle")
+    .attr("r", 15)
+	.style("fill", function(d, i) {return colors(i);})
+    .call(force.drag); 
+	
+	var text = svg.append("g").selectAll("text")
+    .data(force.nodes())
+  .enter().append("text")
+    .attr("x", 15)
+    .attr("y", ".31em")
+    .text(function(d) { return d.name; });
+
+// Use elliptical arc path segments to doubly-encode directionality.
+function tick() {
+  path.attr("d", linkArc);
+  circle.attr("transform", transform);
+  text.attr("transform", transform);
+}
+
+function linkArc(d) {
+  var dx = d.target.x - d.source.x,
+      dy = d.target.y - d.source.y,
+      dr = Math.sqrt(dx * dx + dy * dy);
+  return "M" + d.source.x + "," + d.source.y + "A" + dr + "," + dr + " 0 0,1 " + d.target.x + "," + d.target.y;
+}
+
+function transform(d) {
+  return "translate(" + d.x + "," + d.y + ")";
+}
+
+});
+
+	</script>
+		
+<div class ="container text-center">
+<button type ="button" class="btn btn-primary text-center"> Further analysis </button>
+</div>
+
+{% endblock %}

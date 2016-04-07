@@ -1,0 +1,137 @@
+{% extends "basic_temp.html" %}
+
+{% block content %}
+<!--
+<center>
+	<h2>word: {{mystring}} </h2>
+</center> -->
+	<div class ="container text-center">
+	<h1> Apple </h1>
+	<hr>
+	</div>
+	
+	<div id="tooltip" class="hidden">
+        <p><strong>Important Label Heading</strong></p>
+        <p><span id="value">100</span></p>
+		</div>
+<script type="text/javascript">
+
+//Width and height
+var w = 1000;var h = 800;
+// initialising force layout
+var force = d3.layout.force()
+    .size([w, h])
+    .charge(-800)
+    .start();
+
+// initialising SVG element	
+var svg = d3.select("#emotionWheel").append("svg").attr("width",w).attr("height",h);
+// color category for nodes
+var colors = d3.scale.category10();
+
+d3.json("{{ url_for ('static', filename= 'force.json' )}}", function(error,graph){
+
+//initialise nodes and links to the force
+force
+	.nodes(graph.nodes)
+	.links(graph.links)
+	.linkDistance(200)
+	.start();
+// creating lines that connect nodes
+var link = svg.selectAll(".link")
+	.data(graph.links)
+	.enter().append("line")
+	.attr("class","link")
+	.style("stroke", "#ccc")
+    .style("stroke-width", 
+	function(d)
+	{if (d.value > 200){
+	return 10;
+	}
+	else{
+	return 2;
+	};});
+
+	
+var labels = svg.selectAll("text")                                      //***NEW
+	.data(graph.links)
+	.enter()
+	.append("text")
+	.attr({"x":function(d){return d.x;},
+		   "y":function(d){return d.y;}})
+	.text(function(d){return d.value;});
+
+	//creating nodes that are connected by links
+var node = svg.selectAll("g")
+	.data(graph.nodes)
+	.enter().append("g").on("mouseover", function(d) {
+
+//Get this bar's x/y values, then augment for the tooltip
+//var xPosition = parseFloat(d3.select(this).attr("x")) / 2;
+//var yPosition = parseFloat(d3.select(this).attr("y")) / 2 + h / 2;
+
+var xPosition = d.x + w/2
+var yPosition = d.y
+
+//Update the tooltip position and value
+d3.select("#tooltip")
+  .style("left", xPosition + "px")
+  .style("top", yPosition + "px")
+  .select("#value")
+  .text(d.group);
+
+//Show the tooltip
+d3.select("#tooltip").classed("hidden", false);
+
+}).on("mouseout",function() {
+
+//Hide the tooltip
+d3.select("#tooltip").classed("hidden", true);
+
+})
+	
+node.append("circle").attr("r", 20).style("fill", function(d) {return colors(d.group);}).call(force.drag);
+node.append("text").attr("x",18).attr("y",18).attr("dy",".35em").text(function(d) {return d.id;});
+
+/*
+function mouseover(){
+	d3.select(this).select("circle").transition()
+	.duration(750)
+	.attr("r",30)
+}
+*/
+/*
+function mouseout(){
+	d3.select(this).select("circle").transition()
+	.duration(750)
+	.attr("r",20);
+}
+*/
+	force.on("tick", function() {
+	link.attr("x1", function(d) { return d.source.x; })
+        .attr("y1", function(d) { return d.source.y; })
+        .attr("x2", function(d) { return d.target.x; })
+        .attr("y2", function(d) { return d.target.y; });
+
+						
+		labels.attr("x", function(d) {
+            return ((d.source.x + d.target.x)/2);
+        })
+        .attr("y", function(d) {
+            return ((d.source.y + d.target.y)/2);
+        });
+//nodes.attr("cx", function(d) { return d.x; })
+    // .attr("cy", function(d) { return d.y; });
+	
+	node.attr("transform", function(d){
+		return "translate("+d.x +","+ d.y +")";}
+	);
+});
+});
+	</script>
+		
+<div class ="container text-center">
+<button type ="button" class="btn btn-primary text-center"> Further analysis </button>
+</div>
+
+{% endblock %}

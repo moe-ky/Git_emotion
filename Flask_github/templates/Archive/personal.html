@@ -1,0 +1,83 @@
+{% extends "basic_temp.html" %}
+
+{% block content %}
+<!--
+<center>
+	<h2>word: {{mystring}} </h2>
+</center> -->
+<div class="row inline-block container jumbotron" style="background-color:teal;color:#ffffff">
+	<div class="col-md-4 container text-right" >
+	<img src = "{{ url_for ('static', filename= 'image/images.jpg')}}" style="width:100px;height:100px;"> </img>
+	</div>
+	<div class ="col-md-8 container text-left">
+	<h1> <strong> MOYIN KOIKI </strong> </h1>
+	</div>
+</div>
+
+
+<script type="text/javascript">
+
+	//Width and height
+			var w = 1000;
+			var h = 500;
+			var svg = d3.select("#emotionWheel").append("svg").attr("width",w).attr("height",h);
+			var colors = d3.scale.category10();
+
+var dataset = {
+        nodes: [
+                { name: "Emotion" },
+                { name: "Amusement" },
+                { name: "Angry" },
+                { name: "Compassion" },
+                { name: "Contempt" },
+                { name: "Disappointment" },
+                { name: "Disgust" },
+                { name: "Fear" },
+        ],
+        edges: [
+                { source: 0, target: 1, value:150},
+                { source: 0, target: 2, value:150},
+                { source: 0, target: 3, value:150},
+                { source: 0, target: 4, value:150},
+                { source: 0, target: 5, value:150},
+                { source: 0, target: 6, value:150},
+                { source: 0, target: 7, value:150},
+        ]
+};
+// initialising force layout
+var force = d3.layout.force()
+                     .nodes(dataset.nodes)
+                     .links(dataset.edges)
+                     .size([w, h])
+                     .linkDistance(function(d){return d.value;})
+                     .charge([-500])           
+                     .start();
+// create an SVG line for each edge
+var edges = svg.selectAll("line")
+        .data(dataset.edges)
+        .enter()
+        .append("line")
+        .style("stroke", "#ccc")
+        .style("stroke-width", 1);
+// create an SVG circle for each node
+var nodes = svg.selectAll("circle")
+        .data(dataset.nodes)
+        .enter()
+        .append("circle")
+        .attr("r", 18)
+		.style("fill", function(d, i) {return colors(i);})
+        .call(force.drag);
+		
+force.on("tick", function() {edges.attr("x1", function(d) { return d.source.x; })
+     .attr("y1", function(d) { return d.source.y; })
+     .attr("x2", function(d) { return d.target.x; })
+     .attr("y2", function(d) { return d.target.y; });
+
+nodes.attr("cx", function(d) { return d.x; })
+     .attr("cy", function(d) { return d.y; });
+
+});
+	</script>
+
+
+{% endblock %}
