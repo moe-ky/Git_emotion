@@ -13,7 +13,7 @@ from nltk.stem.snowball import SnowballStemmer
 stemmer = SnowballStemmer("english")
 punctuation = list(string.punctuation)
 negation_list = ["never", "not", "dont"]
-intensifier_list = ["extremely", "very"]
+intensifier_list = {"extremely":2, "very":1}
 negation_counter = 0
 
 
@@ -72,7 +72,7 @@ class PreProcess:
                             word_list.append(i)
                             # For testing purposes
                             list_.append(i)
-                    print("done")
+                    #print("done")
                     emo = EAC(name, word_list, file_list[x], time_stamp, num_tweets,res)
                     emo.emotion_analysis()
                 x += 1
@@ -117,6 +117,7 @@ class EAC:
 
             # check for negating of intensifier words
             for i in grams:
+                # print(i)
                 for n in negation_list:
                     if n in i:
                         negate.append(i)
@@ -125,7 +126,7 @@ class EAC:
                     if n in i:
                         intensi.append(i)
                         intensifier_flag =True
-            # print(word_list)
+                    #print(intensi)
 
             for x in word_list:
                 if Functions.binary_search(self, ordered, x) is True:
@@ -141,7 +142,8 @@ class EAC:
                             if intensifier_flag is True:
                                 for i in intensi:
                                     if x in i:
-                                        wrd = di_ct[x][0] + 1
+                                        score = (intensifier_list[i[0]])
+                                        wrd = di_ct[x][0] + score
                                         intensifier_flag = False
                                     else:
                                         wrd = di_ct[x][0]
@@ -277,7 +279,7 @@ class DataPrep:
                 filex = open("C:/Users/MOYIN/Desktop/Flask/static/Companies/" + name + "/"+os.path.basename(file), 'w')
                 json.dump(d, filex)
                 print("Graph files created: ", filex.name)
-            return os.path.basename(file)
+                return True
 
         except BaseException as e:
             print("Graph creation error : ", e)
