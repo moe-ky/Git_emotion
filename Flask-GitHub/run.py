@@ -3,7 +3,7 @@ from flask import request
 import json
 import Correlation
 
-application = Flask(__name__)
+app = Flask(__name__)
 
 
 @app.route("/Home")
@@ -45,4 +45,4 @@ def ITV():
 
 
 if __name__ == '__main__':
-    application.run(debug = True)
+    app.run(debug = True)
